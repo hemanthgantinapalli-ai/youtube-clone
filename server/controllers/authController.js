@@ -47,8 +47,19 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json({ message: 'Registration successful' });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error during registration' });
+    console.error('registerUser error:', err);
+
+    if (err.name === 'MongoServerError' && err.code === 11000) {
+      const duplicateKey = Object.keys(err.keyValue || {}).join(', ');
+      return res.status(400).json({ message: `Duplicate field value: ${duplicateKey}` });
+    }
+
+    const response = {
+      message: process.env.NODE_ENV === 'production' ? 'Server error during registration' : err.message,
+    };
+    if (process.env.NODE_ENV !== 'production') response.stack = err.stack;
+
+    res.status(500).json(response);
   }
 };
 

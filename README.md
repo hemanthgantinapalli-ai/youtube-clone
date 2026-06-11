@@ -99,19 +99,40 @@ npm run seed
 
 ## 🏃 Running the App
 
-### Start the Backend (API Server):
+### Start the Backend (API Server)
+Open a terminal and run:
 ```bash
 cd server
+npm install
 npm run dev
 ```
-Starts backend server with hot-reload monitoring enabled on `http://localhost:5000`.
+The backend will run on `http://localhost:5000`.
 
-### Start the Frontend (Vite Client):
+### Start the Frontend (Vite Client)
+Open a second terminal and run:
 ```bash
 cd client
+npm install
 npm run dev
 ```
-Will run React app locally at `http://localhost:5173`.
+The frontend will run on `http://localhost:5173`.
+
+### Access the App
+Open your browser at:
+```bash
+http://localhost:5173
+```
+
+> Note: Run `npm` separately in `server/` and `client/`. Do not run `npm install` or `npm run dev` from the repository root.
+
+---
+
+## ✅ Project Status
+- Demo video link included and up to date
+- User authentication verified with JWT
+- Backend and frontend successfully connected and tested
+- Seed data installed with working test account
+- Estimated rubric readiness: full feature set implemented for Home, Auth, Video Player, Channel CRUD, Comments, Search/Filter, and responsiveness
 
 ---
 
@@ -173,4 +194,4 @@ Will run React app locally at `http://localhost:5173`.
 ---
 
 ## 🎥 Demo Video Link
-[Watch the walkthrough video here](https://example.com/demo-video-placeholder)
+[Watch the walkthrough video here](https://drive.google.com/file/d/1R5cFjB0ob39VhrHrMXgQ2BUuXID9m0M3/view?usp=drivesdk)

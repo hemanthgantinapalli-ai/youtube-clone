@@ -18,16 +18,21 @@ const app = express();
 
 // Middleware
 // Allow the frontend dev URL(s). Use CLIENT_URL env (comma-separated) or default localhost dev ports.
-const CLIENT_URLS = (process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:5174')
+const CLIENT_URLS = (process.env.CLIENT_URL || 'http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173,http://127.0.0.1:5174')
 	.split(',')
 	.map((s) => s.trim());
+
+const isLocalNetworkOrigin = (origin) => {
+	if (!origin) return false;
+	return /^(https?:\/\/)(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+):(\d+)$/.test(origin);
+};
 
 app.use(
 	cors({
 		origin: (origin, callback) => {
 			// Allow non-browser requests (e.g., Postman) with no origin
 			if (!origin) return callback(null, true);
-			if (CLIENT_URLS.includes(origin)) return callback(null, true);
+			if (CLIENT_URLS.includes(origin) || isLocalNetworkOrigin(origin)) return callback(null, true);
 			return callback(new Error('Not allowed by CORS'));
 		},
 		credentials: true,
